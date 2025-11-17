@@ -109,10 +109,10 @@ architecture rtl of alarme is
     constant S_ATV : std_logic_vector(1 downto 0) := "01";
     constant S_DIS : std_logic_vector(1 downto 0) := "10";
 
-    signal cur_state, next_state : std_logic_vector(1 downto 0);
+signal cur_state, next_state : std_logic_vector(1 downto 0);
 begin
 
-    -- processo de registro (flip-flops) com reset assíncrono
+-- processo de registro (flip-flops) com reset assíncrono
     proc_reg : process(clk, reset)
     begin
         if reset = '1' then
@@ -122,8 +122,8 @@ begin
         end if;
     end process;
 
-    -- lógica de próxima condição (combinacional)
-    proc_next : process(cur_state, ativar, sensor)
+-- lógica de próxima condição (combinacional)
+       proc_next : process(cur_state, ativar, sensor)
     begin
         case cur_state is
             when S_DES =>
@@ -133,27 +133,28 @@ begin
                     next_state <= S_DES;
                 end if;
 
-            when S_ATV =>
-                if sensor = '1' then
-                    next_state <= S_DIS;
-                else
-                    next_state <= S_ATV;
-                end if;
+when S_ATV =>
+        if sensor = '1' then
+               next_state <= S_DIS;
+       else
+               next_state <= S_ATV;
+end if;
 
-            when S_DIS =>
-                -- permanece em disparado até o reset assíncrono
-                next_state <= S_DIS;
+when S_DIS =>
+       -- permanece em disparado até o reset assíncrono
+       next_state <= S_DIS;
 
-            when others =>
-                next_state <= S_DES;
-        end case;
-    end process;
+when others =>
+       next_state <= S_DES;
+       end case;
+end process;
 
-    -- saídas
+-- saídas
     alarme <= '1' when cur_state = S_DIS else '0';
     estado <= cur_state;
+    
+end architecture
 
-end architecture;
 
 ## 🧾 Conclusão
 
