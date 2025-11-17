@@ -68,16 +68,6 @@ A FSM (Finite State Machine) do sistema possui **três estados** principais e **
 
 ## 💻 Estrutura do Repositório
 
-
----
-
-## 🖼️ Prints das Simulações
-
-### 🔹 Forma de Onda
-A imagem abaixo mostra o **comportamento temporal do sistema**, evidenciando as transições entre os três estados (desativado, ativado e disparado) conforme as entradas:
-
-![Forma de Onda](prints/simulacao_forma_onda.png)
-
 ---
 
 ### 🔹 Blocos Lógicos (RTL)
@@ -123,5 +113,3 @@ Durante o desenvolvimento deste projeto, foi possível compreender de forma prá
 
 ---
 
-## 📎 Repositório GitHub
-🔗 [Clique aqui para acessar o repositório do projeto](https://github.com/seuusuario/alarme-residencial-vhdl)
