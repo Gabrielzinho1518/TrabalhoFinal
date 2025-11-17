@@ -86,6 +86,75 @@ A FSM (Finite State Machine) do sistema possui **três estados** principais e **
 
 ---
 
+## Código VHDL 
+
+-- alarme.vhd
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity alarme is
+    port (
+        clk    : in  std_logic;
+        reset  : in  std_logic;  -- reset assíncrono ativo em '1' -> volta para DESATIVADO
+        ativar : in  std_logic;  -- botão para ativar vigilância
+        sensor : in  std_logic;  -- detector (1 = presença detectada)
+        alarme : out std_logic;  -- 1 = alarme disparado
+        estado : out std_logic_vector(1 downto 0) -- 00=desativado, 01=ativado, 10=disparado
+    );
+end entity;
+
+architecture rtl of alarme is
+    -- codificação dos estados
+    constant S_DES : std_logic_vector(1 downto 0) := "00";
+    constant S_ATV : std_logic_vector(1 downto 0) := "01";
+    constant S_DIS : std_logic_vector(1 downto 0) := "10";
+
+    signal cur_state, next_state : std_logic_vector(1 downto 0);
+begin
+
+    -- processo de registro (flip-flops) com reset assíncrono
+    proc_reg : process(clk, reset)
+    begin
+        if reset = '1' then
+            cur_state <= S_DES;
+        elsif rising_edge(clk) then
+            cur_state <= next_state;
+        end if;
+    end process;
+
+    -- lógica de próxima condição (combinacional)
+    proc_next : process(cur_state, ativar, sensor)
+    begin
+        case cur_state is
+            when S_DES =>
+                if ativar = '1' then
+                    next_state <= S_ATV;
+                else
+                    next_state <= S_DES;
+                end if;
+
+            when S_ATV =>
+                if sensor = '1' then
+                    next_state <= S_DIS;
+                else
+                    next_state <= S_ATV;
+                end if;
+
+            when S_DIS =>
+                -- permanece em disparado até o reset assíncrono
+                next_state <= S_DIS;
+
+            when others =>
+                next_state <= S_DES;
+        end case;
+    end process;
+
+    -- saídas
+    alarme <= '1' when cur_state = S_DIS else '0';
+    estado <= cur_state;
+
+end architecture;
+
 ## 🧾 Conclusão
 
 Durante o desenvolvimento deste projeto, foi possível compreender de forma prática:
