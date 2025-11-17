@@ -4,6 +4,8 @@
 
 ---
 
+[Sistema-de-Alarme-Residencial-FSM-Conceitos-e-Implementacao-em-VHDL (1).pdf](https://github.com/user-attachments/files/23584745/Sistema-de-Alarme-Residencial-FSM-Conceitos-e-Implementacao-em-VHDL.1.pdf)
+
 ## 🎯 Objetivo do Circuito
 O objetivo deste projeto é desenvolver, em **VHDL utilizando o Vivado**, um **sistema de alarme residencial digital** capaz de representar três estados principais de operação:  
 1. **Desativado** – o sistema está inativo, sem monitoramento;  
@@ -67,13 +69,6 @@ A FSM (Finite State Machine) do sistema possui **três estados** principais e **
 ---
 
 ## 💻 Estrutura do Repositório
-
----
-
-### 🔹 Blocos Lógicos (RTL)
-O diagrama abaixo representa a **estrutura lógica gerada pelo Vivado**, mostrando os blocos e conexões que compõem o circuito:
-
-![Blocos Lógicos](prints/simulacao_blocos_logicos.png)
 
 ---
 
