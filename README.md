@@ -186,5 +186,6 @@ Durante o desenvolvimento deste projeto, foi possível compreender de forma prá
 - Interpretação das formas de onda.  
 - Entendimento inicial da transição de estados com base nas entradas.
 
+### Obrigado Professor!
 ---
 
